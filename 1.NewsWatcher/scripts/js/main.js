@@ -1,8 +1,11 @@
 'use strict';
 
-function addTimer(){
-//
-}
+let button = document.getElementById('btn');
+            button.addEventListener('click', () => {
+                console.log('CLICK');
+                debugger;
+                getNews(); // (A)
+            });
 
 function getNews(){
     var request = new Request("https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=top&apiKey=844b4958cb104b4b9f28fe3e786f6b67"), 
