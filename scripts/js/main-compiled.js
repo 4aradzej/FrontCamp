@@ -1,7 +1,5 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//import "babel-polyfill";
-
 (function () {
     'use strict';
 
@@ -12,10 +10,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     });
 
     function getNews() {
-       // var request = new Request("https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=top&apiKey=844b4958cb104b4b9f28fe3e786f6b67");
+        var request = new Request("https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=top&apiKey=844b4958cb104b4b9f28fe3e786f6b67");
         var init = { method: 'GET' };
 
-        fetch("https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=top&apiKey=844b4958cb104b4b9f28fe3e786f6b67", init).then(function (r) {
+        fetch(request, init).then(function (r) {
             return r.json();
         }).then(function (data) {
             returnNews(data);
