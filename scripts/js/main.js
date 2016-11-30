@@ -17,18 +17,31 @@
             .catch(() => {new NewsError('something wrog with getting news;').view();} );
     }
     
-    function returnNews(newsObj){
-        let news = new News(newsObj);
-        debugger;
-        if (news.status == 'ok') {
+    function returnNews(data){
+        if (data.status == 'ok') {
+            let news = data.articles.map(a => new NewsArticle(a));
             let container = document.getElementById("container");
             while (container.firstChild) {
                     container.removeChild(container.firstChild);
-                }
-            news.viewArticles(container);
-            };
+            }
+
+            news.forEach((n) => viewArticleAsTable(container, n));
         }
-    
+    }
+
+    function viewArticleAsTable(elem, article) {
+        if (elem)
+        {                     
+            elem.innerHTML += `
+                <table border='1' width='100%'>
+                    <tr><th><a href=${article.url}>${article.title}</a></th></tr>
+                    <tr><td><image src=${article.urlToImage} />${article.description}</td></tr>
+                    <tr><td>${article.author}</td></tr>
+                </table> `;           
+        }
+    }
+
+    /* Classes */
     class NewsError{
         constructor(e){
             this.message = e ? e : '';
@@ -39,39 +52,16 @@
         }
 
     }
-
-
-    class News{
+    
+    class NewsArticle{
         constructor(data) {
-            debugger;
-            Object.assign(this, data);
-        }
-
-        viewArticles(elem){
-            this.articles.forEach(function(a){
-                News.viewArticle(elem, a);
-            });
-        }
-
-        static getNewsTemplated(article) {
-            debugger;
-            return `<table border='1' width='100%'>
-                        <tr><th><a href=${article.url}>${article.title}</a></th></tr>
-                        <tr><td><image src=${article.urlToImage} />${article.description}</td></tr>
-                        <tr><td>${article.author}</td></tr>
-                    </table> `;
-        }
-
-        static viewArticle(elem, a) {
-            if (elem)
-            {
-                let newNode = document.createElement('div');   
-                let data = News.getNewsTemplated(a);
-                
-                newNode.innerHTML = data;
-                elem.appendChild(newNode);
-            }
-        }   
+            this.author = data.author;
+            this.title = data.title;
+            this.description = data.description;
+            this.url = data.url;
+            this.urlToImage = data.urlToImage;
+            this.publishedAt = data.publishedAt;
+        }      
     }
 })();  
 
