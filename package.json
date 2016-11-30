@@ -1,0 +1,21 @@
+{
+  "babel": {
+    "presets": [
+      [
+        "es2015",
+        {
+          "loose": true,
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0"
+  },
+  "dependencies": {
+    "es6-promise": "^4.0.5",
+    "fetch-polyfill": "^0.8.2"
+  }
+}

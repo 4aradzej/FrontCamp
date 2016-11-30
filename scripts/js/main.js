@@ -1,6 +1,8 @@
+//import "babel-polyfill";
+
 (function(){
     'use strict';
-    
+
     let button = document.getElementById('btn');
             button.addEventListener('click', () => {
                 console.log('CLICK');
