@@ -1,3 +1,6 @@
+require('es6-promise/auto');
+require('fetch-polyfill');
+
 (function(){
     'use strict';
 
@@ -8,10 +11,9 @@
             });
             
     function getNews(){
-        let request = new Request("https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=top&apiKey=844b4958cb104b4b9f28fe3e786f6b67"); 
-        let init = { method: 'GET' };
+        let request = new Request("https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=top&apiKey=844b4958cb104b4b9f28fe3e786f6b67", { method: 'GET' }); 
 
-        fetch(request, init)
+        fetch(request)
             .then(r => r.json())
             .then((data) => { returnNews(data); })
             .catch(() => {new NewsError('something wrog with getting news;').view();} );

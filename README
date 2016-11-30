@@ -1,0 +1,2 @@
+before using site please build the sources by using cmd:
+> npm run build
