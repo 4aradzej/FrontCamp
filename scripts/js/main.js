@@ -1,5 +1,6 @@
 require('es6-promise/auto');
 require('fetch-polyfill');
+//require('repository');
 
 (function(){
     'use strict';
@@ -54,7 +55,7 @@ require('fetch-polyfill');
         }
 
     }
-    
+
     class NewsArticle{
         constructor(data) {
             this.author = data.author;
