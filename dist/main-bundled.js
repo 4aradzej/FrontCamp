@@ -46,13 +46,14 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _repository = __webpack_require__(1);
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var _newsTable = __webpack_require__(2);
 
-	__webpack_require__(1);
-	__webpack_require__(5);
-	//require('repository');
+	__webpack_require__(3);
+	__webpack_require__(7);
+	//require('./repository');
+
 
 	(function () {
 	    'use strict';
@@ -71,7 +72,7 @@
 	        }).then(function (data) {
 	            returnNews(data);
 	        }).catch(function () {
-	            new NewsError('something wrog with getting news;').view();
+	            new _repository.NewsError('something wrog with getting news;').view();
 	        });
 	    }
 
@@ -79,7 +80,7 @@
 	        if (data.status == 'ok') {
 	            (function () {
 	                var news = data.articles.map(function (a) {
-	                    return new NewsArticle(a);
+	                    return new _repository.NewsArticle(a);
 	                });
 	                var container = document.getElementById("container");
 	                while (container.firstChild) {
@@ -87,61 +88,87 @@
 	                }
 
 	                news.forEach(function (n) {
-	                    return viewArticleAsTable(container, n);
+	                    return (0, _newsTable.viewArticleAsTable)(container, n);
 	                });
 	            })();
 	        }
 	    }
-
-	    function viewArticleAsTable(elem, article) {
-	        if (elem) {
-	            elem.innerHTML += '\n                <table border=\'1\' width=\'100%\'>\n                    <tr><th><a href=' + article.url + '>' + article.title + '</a></th></tr>\n                    <tr><td><image src=' + article.urlToImage + ' />' + article.description + '</td></tr>\n                    <tr><td>' + article.author + '</td></tr>\n                </table> ';
-	        }
-	    }
-
-	    /* Classes */
-
-	    var NewsError = function () {
-	        function NewsError(e) {
-	            _classCallCheck(this, NewsError);
-
-	            this.message = e ? e : '';
-	        }
-
-	        _createClass(NewsError, [{
-	            key: 'view',
-	            value: function view() {
-	                console.log(this.message);
-	            }
-	        }]);
-
-	        return NewsError;
-	    }();
-
-	    var NewsArticle = function NewsArticle(data) {
-	        _classCallCheck(this, NewsArticle);
-
-	        this.author = data.author;
-	        this.title = data.title;
-	        this.description = data.description;
-	        this.url = data.url;
-	        this.urlToImage = data.urlToImage;
-	        this.publishedAt = data.publishedAt;
-	    };
 	})();
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/* Classes */
+	var NewsError = function () {
+	    function NewsError(e) {
+	        _classCallCheck(this, NewsError);
+
+	        this.message = e ? e : '';
+	    }
+
+	    _createClass(NewsError, [{
+	        key: 'view',
+	        value: function view() {
+	            console.log(this.message);
+	        }
+	    }]);
+
+	    return NewsError;
+	}();
+
+	var NewsArticle = function NewsArticle(data) {
+	    _classCallCheck(this, NewsArticle);
+
+	    this.author = data.author;
+	    this.title = data.title;
+	    this.description = data.description;
+	    this.url = data.url;
+	    this.urlToImage = data.urlToImage;
+	    this.publishedAt = data.publishedAt;
+	};
+
+	exports.NewsError = NewsError;
+	exports.NewsArticle = NewsArticle;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.viewArticleAsTable = viewArticleAsTable;
+	function viewArticleAsTable(elem, article) {
+	    if (elem) {
+	        elem.innerHTML += "\n                <table border='1' width='100%'>\n                    <tr><th><a href=" + article.url + ">" + article.title + "</a></th></tr>\n                    <tr><td><image src=" + article.urlToImage + " />" + article.description + "</td></tr>\n                    <tr><td>" + article.author + "</td></tr>\n                </table> ";
+	    }
+	}
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file can be required in Browserify and Node.js for automatic polyfill
 	// To use it:  require('es6-promise/auto');
 	'use strict';
-	module.exports = __webpack_require__(2).polyfill();
+	module.exports = __webpack_require__(4).polyfill();
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -280,7 +307,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(4);
+	    var vertx = __webpack_require__(6);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -1301,10 +1328,10 @@
 
 	})));
 	//# sourceMappingURL=es6-promise.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), (function() { return this; }())))
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1490,13 +1517,13 @@
 
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	(function() {

@@ -20,3 +20,5 @@ class NewsArticle{
         this.publishedAt = data.publishedAt;
     }      
 }
+
+export {NewsError, NewsArticle}

@@ -1,6 +1,8 @@
 require('es6-promise/auto');
 require('fetch-polyfill');
-//require('repository');
+//require('./repository');
+import {NewsError, NewsArticle} from './repository';
+import {viewArticleAsTable} from './newsTable';
 
 (function(){
     'use strict';
@@ -30,41 +32,6 @@ require('fetch-polyfill');
 
             news.forEach((n) => viewArticleAsTable(container, n));
         }
-    }
-
-    function viewArticleAsTable(elem, article) {
-        if (elem)
-        {                     
-            elem.innerHTML += `
-                <table border='1' width='100%'>
-                    <tr><th><a href=${article.url}>${article.title}</a></th></tr>
-                    <tr><td><image src=${article.urlToImage} />${article.description}</td></tr>
-                    <tr><td>${article.author}</td></tr>
-                </table> `;           
-        }
-    }
-
-    /* Classes */
-    class NewsError{
-        constructor(e){
-            this.message = e ? e : '';
-        }
-
-        view(){
-            console.log(this.message);
-        }
-
-    }
-
-    class NewsArticle{
-        constructor(data) {
-            this.author = data.author;
-            this.title = data.title;
-            this.description = data.description;
-            this.url = data.url;
-            this.urlToImage = data.urlToImage;
-            this.publishedAt = data.publishedAt;
-        }      
     }
 })();  
 
