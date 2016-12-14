@@ -1,2 +1,4 @@
 before using site please build the sources by using cmd:
-> npm run build
+> npm run build-prod or npm run dev (for development config)
+
+-folder 3.WebPack contains the latest and valid code

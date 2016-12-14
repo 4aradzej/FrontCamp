@@ -1,0 +1,27 @@
+footer {
+    padding: 50px 0;
+    margin-top: 20px;
+    background-color: #B1938B;
+}
+
+.container {
+    padding: 0 15px;
+}
+
+.article-body {
+    display: inline-block;
+    width: 100%;
+    color: #373737;
+}
+
+.article-image {
+    float: left;
+    width: 30%;
+    margin-right: 20px;
+}
+
+.article-description {
+    float: left;
+    width: 60%;
+    font-size: 14px;
+}
