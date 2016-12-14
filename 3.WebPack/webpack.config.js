@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -17,11 +18,11 @@ module.exports = {
             {
                 test: /\.html$/,
                 exclude: /node_modules/,
-                loader: 'html'
+                loader: 'underscore-template-loader'
             },
             { 
                 test: /\.css$/, 
-                loader: "style-loader!css-loader" 
+                loader: 'style-loader!css-loader' 
             }
         ]
     },
@@ -38,6 +39,13 @@ module.exports = {
             template: 'app/app-template.html',
             devServer: 'http://localhost:3001',
             inject: 'body'
-        })
+        }),
+        new webpack.optimize.UglifyJsPlugin(
+            {
+                compress: {
+                    warnings: false
+                }
+            }
+        )
     ]
 }

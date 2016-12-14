@@ -17,7 +17,7 @@ module.exports = {
             {
                 test: /\.html$/,
                 exclude: /node_modules/,
-                loader: 'html-loader'
+                loader: "underscore-template-loader"
             },
             { 
                 test: /\.css$/, 
