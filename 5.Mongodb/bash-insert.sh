@@ -1,0 +1,1 @@
+mongo ds113628.mlab.com:13628/mynews -u admin -p admin < insertNews.js

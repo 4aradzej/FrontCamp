@@ -1,0 +1,1 @@
+mongoimport -h ds113628.mlab.com:13628 -u admin -p admin --db mynews --collection grades --file grades.json
